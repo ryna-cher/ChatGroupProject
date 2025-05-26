@@ -14,7 +14,7 @@ namespace DataBase.DbLayer
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
-        //public DbSet<MessageRecipient> MessageRecipients { get; set; }
+        
         //колекція таблиць у базі данних
 
         public ChatDbContext()
