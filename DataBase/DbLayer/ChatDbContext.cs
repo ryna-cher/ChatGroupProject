@@ -14,7 +14,7 @@ namespace DataBase.DbLayer
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<MessageRecipient> MessageRecipients { get; set; }
+        //public DbSet<MessageRecipient> MessageRecipients { get; set; }
         //колекція таблиць у базі данних
 
         public ChatDbContext()
@@ -45,22 +45,23 @@ namespace DataBase.DbLayer
             //тут можна буде налаштовувати схему бази данних (аля зв'язки, складні ключі і тд.) 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<MessageRecipient>()
-            .HasOne(mr => mr.Message)
-            .WithMany(m => m.Recipients)
-            .HasForeignKey(mr => mr.MessageId)
-            .OnDelete(DeleteBehavior.Restrict);  
+            modelBuilder.Entity<Message>()
+            .HasOne(m => m.Sender) // Message має одну властивість Sender
+            .WithMany(u => u.SentMessages) // User має багато SentMessages
+            .HasForeignKey(m => m.SenderId) // і SenderId — це FK на Users.Id
+            .OnDelete(DeleteBehavior.Restrict);  // при видаленні користувача – не видаляти його повідомлення
 
-            modelBuilder.Entity<MessageRecipient>()
-                .HasOne(mr => mr.Recipient)
-                .WithMany(u => u.ReceivedMessages)
-                .HasForeignKey(mr => mr.RecipientId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Recipient) // Message має одну властивість Recipient
+                .WithMany(u => u.ReceivedMessages) // User має багато ReceivedMessages
+                .HasForeignKey(m => m.RecipientId) // і RecipientId — це FK на Users.Id
+                .OnDelete(DeleteBehavior.Restrict); // при видаленні користувача – не видаляти його повідомлення
 
-            //без цих двох страшних функцій виникав конфлікт каскадних операцій видалення:
-            //у нас в таблиці MessageRecipient є два зовнішні ключі: і обидва ці ключі можуть мати
-            //каскадне видалення (тобто при видаленні користувача або повідомлення автоматично видаляються записи в MessageRecipients)
-            //в цих фукціях по суті написанно "при видаленні User або Message не видаляти автоматично записи з MessageRecipient"
+
+            //У нас є кілька зовнішніх ключів на одну і ту саму таблицю, тому треба явно вказати EF Core як вони зв'язані
+            //без цього з'являлась помилка.
+            //по суті, в цих функціях сказано “ось SenderId — це зв'язок з User, і ця навігація називається Sender,
+            //а RecipientId — це інший User, і ця навігація називається Recipient”.
         }
 
 

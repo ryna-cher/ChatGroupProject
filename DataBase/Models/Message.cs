@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Models
 {
@@ -14,14 +10,24 @@ namespace DataBase.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public int SenderId { get; set; }
+
+        [Required]
+        public int RecipientId { get; set; }
 
         [Required]
         public string Content { get; set; } = null!;
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        //вказує, що значення цього поля обчислюється автоматично базою даних,
+        //а не встановлюється вручну в коді
+        public DateTime Timestamp { get; set; }
+
         [ForeignKey("SenderId")]
         public virtual User Sender { get; set; } = null!;
 
-        public virtual ICollection<MessageRecipient> Recipients { get; set; } = new List<MessageRecipient>();
+        [ForeignKey("RecipientId")]
+        public virtual User Recipient { get; set; } = null!;
     }
 }
