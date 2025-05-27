@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Collections.Generic;
 
 namespace ServerChat
 {
     internal class TcpServer
     {
         private TcpListener listener; // 1 - TCP слухач
-        private CancellationTokenSource cancellationTokenSource; // 2 - токен для зупинки
-
-        private string connectionString = ""; // 3 - шлях до SQLite
+        private CancellationTokenSource cancellationTokenSource; // 2 - токен для зупинки сервера
+        private string connectionString = "Data Source=chat.db"; // 3 - Шлях до SQLite бази
 
         // 4 - створення сервера: IP + порт
         public TcpServer(string ip, int port)
@@ -25,21 +25,21 @@ namespace ServerChat
         public void Start()
         {
             cancellationTokenSource = new();
-            Task.Run(() => StartAsync(cancellationTokenSource.Token));
+            Task.Run(() => StartAsync(cancellationTokenSource.Token)); // Запуск сервера у фоновому потоці
         }
 
-        // 6 - прийом клієнтів
+        // 6 - основний цикл прийому підключень
         private async Task StartAsync(CancellationToken token)
         {
             listener.Start();
-            Console.WriteLine("Server is listening...");
+            Console.WriteLine("\nServer is listening...");
 
             try
             {
                 while (!token.IsCancellationRequested)
                 {
-                    TcpClient client = await listener.AcceptTcpClientAsync(token);
-                    _ = HandleClientAsync(client, token);
+                    TcpClient client = await listener.AcceptTcpClientAsync(token); // Приймаємо підключення
+                    _ = HandleClientAsync(client, token); // Обробка клієнта в окремому потоці
                 }
             }
             catch (Exception ex)
@@ -48,68 +48,164 @@ namespace ServerChat
             }
         }
 
-        // 7 - обробка одного клієнта — авторизація + прийом повідомлень і запис у БД
+        // 7 - обробка клієнта (авторизація + обробка повідомлень)
         private async Task HandleClientAsync(TcpClient client, CancellationToken token)
         {
-            // з'єднання  з юзером
-            // Прочитати логін (рядок)
-            // Прочитати пароль (рядок)
+            NetworkStream netStream = client.GetStream();
+            byte[] myBuffer = new byte[1024];
 
-            //перевірити, чи існує користувач із такими логіном і паролем
+            // 8 - читаємо логін
+            int count1 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
+            string userName = Encoding.UTF8.GetString(myBuffer, 0, count1).Trim();
 
-            // Якщо існує — надіслати "роль" (user або admin)
+            // 9 - читаємо пароль
+            int count2 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
+            string password = Encoding.UTF8.GetString(myBuffer, 0, count2).Trim();
 
-            // Далі, у циклі:
-            //    Приймати повідомлення до кого і меседж
+            // 10 - перевірка користувача
+            var userInfo = GetUserInfo(userName, password);
+            int userId = userInfo.userId;
+            bool isAdmin = userInfo.isAdmin;
+            bool isBanned = userInfo.isBanned;
 
-            //    Перевірити, чи існує одержувач
+            if (userId == -1)
+            {
+                await SendAsync(netStream, "Authorization failed", token);
+                return;
+            }
 
-            //    Якщо так — зберегти повідомлення в базу 
+            if (isBanned)
+            {
+                await SendAsync(netStream, "You are banned", token);
+                return;
+            }
 
+            await SendAsync(netStream, $"AUTHORIZATION_OK ({(isAdmin ? 1 : 0)})", token);
+
+            // 11 - цикл прийому повідомлень
+            while (!token.IsCancellationRequested)
+            {
+                int count3 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
+                string recipientName = Encoding.UTF8.GetString(myBuffer, 0, count3).Trim();
+                int recipientId = GetUserIdByName(recipientName);
+
+                int count4 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
+                string message = Encoding.UTF8.GetString(myBuffer, 0, count4).Trim();
+
+                if (recipientId != -1)
+                {
+                    SaveMessage(userId, recipientId, message);
+                    await SendAsync(netStream, "MESSAGE_SAVED", token);
+                }
+                else
+                {
+                    await SendAsync(netStream, "USER_NOT_FOUND", token);
+                }
+            }
         }
 
-        // 10 - відправка повідомлень клієнту
+        // 12 - відправка повідомлення клієнту
         private async Task SendAsync(NetworkStream stream, string msg, CancellationToken token)
         {
             byte[] data = Encoding.UTF8.GetBytes(msg);
             await stream.WriteAsync(data, 0, data.Length, token);
             await stream.FlushAsync(token);
             Console.WriteLine("Sent: " + msg);
-
         }
 
-        // 11 - отримання ID користувача за логіном і паролем
-        private int GetUserId(string username, string password)
+        // 13 - авторизація: отримання ID, isAdmin, isBanned
+        public (int userId, bool isAdmin, bool isBanned) GetUserInfo(string username, string password)
         {
-            // Встановити з'єднання з SQLite базою
-            // Виконати SELECT Id FROM Users WHERE UserName = username AND PasswordHash = password
-            // Перевірити, чи користувач знайдений (і він підтверджений, не забанений)
-            // Якщо знайдений — повернути його ID
-            // Якщо ні — повернути -1
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new("SELECT Id, IsAdmin, IsBanned FROM Users WHERE UserName = @u AND Password = @p", conn);
+            cmd.Parameters.AddWithValue("@u", username);
+            cmd.Parameters.AddWithValue("@p", password);
+            using var reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                bool isAdmin = reader.GetInt32(1) == 1;
+                bool isBanned = reader.GetInt32(2) == 1;
+                return (id, isAdmin, isBanned);
+            }
+
+            return (-1, false, false);
         }
 
-        // 12 - отримання ID користувача за логіном
-        private int GetUserIdByName(string username)
+        // 14 - отримання ID користувача за логіном
+        public int GetUserIdByName(string username)
         {
-            // Встановити з'єднання з SQLite
-            // Виконати SELECT Id FROM Users WHERE UserName = username
-            // Якщо знайдений — повернути ID
-            // Якщо ні — повернути -1
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new("SELECT Id FROM Users WHERE UserName = @u", conn);
+            cmd.Parameters.AddWithValue("@u", username);
+            object result = cmd.ExecuteScalar();
+            return result != null ? Convert.ToInt32(result) : -1;
         }
 
-
-        // 13 - збереження повідомлення у Messages
-        private void SaveMessage(int senderId, int recipientId, string content)
+        // 15 - збереження повідомлення
+        public void SaveMessage(int senderId, int recipientId, string content)
         {
-            // Встановити з'єднання з SQLite
-
-            // Додати запис у Messages (SenderId, Content)
-
-            // Додати запис у MessageRecipients (MessageId, RecipientId)
-
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new("INSERT INTO Messages (SenderId, RecipientId, Content) VALUES (@s, @r, @c)", conn);
+            cmd.Parameters.AddWithValue("@s", senderId);
+            cmd.Parameters.AddWithValue("@r", recipientId);
+            cmd.Parameters.AddWithValue("@c", content);
+            cmd.ExecuteNonQuery();
         }
 
-        // 14 - зупинка сервера
+        // 16 - отримання повідомлень лише за ID відправника
+        public List<string> GetMessagesBySenderId(int senderId)
+        {
+            var messages = new List<string>();
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new("SELECT Content FROM Messages WHERE SenderId = @id", conn);
+            cmd.Parameters.AddWithValue("@id", senderId);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                messages.Add(reader.GetString(0));
+            }
+
+            return messages;
+        }
+
+        // 17 - отримання повідомлень за ID відправника і отримувача
+        public List<string> GetMessagesBySenderAndRecipient(int senderId, int recipientId)
+        {
+            var messages = new List<string>();
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new("SELECT Content FROM Messages WHERE SenderId = @s AND RecipientId = @r", conn);
+            cmd.Parameters.AddWithValue("@s", senderId);
+            cmd.Parameters.AddWithValue("@r", recipientId);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                messages.Add(reader.GetString(0));
+            }
+
+            return messages;
+        }
+
+        // 18 - отримання списку всіх користувачів
+        public List<string> GetAllUsers()
+        {
+            var users = new List<string>();
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new("SELECT UserName FROM Users", conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                users.Add(reader.GetString(0));
+            }
+
+            return users;
+        }
+
+        // 19 - зупинка сервера
         public void Stop()
         {
             cancellationTokenSource?.Cancel();
