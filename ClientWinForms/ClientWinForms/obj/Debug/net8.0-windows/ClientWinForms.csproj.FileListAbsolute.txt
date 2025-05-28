@@ -1,0 +1,35 @@
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.exe
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.deps.json
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.runtimeconfig.json
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.pdb
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.ChatForm.resources
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.LoginForm.resources
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\refint\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.pdb
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.genruntimeconfig.cache
+C:\Users\Lenovo\Desktop\Нова папка\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ref\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.exe
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.deps.json
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.runtimeconfig.json
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\bin\Debug\net8.0-windows\ClientWinForms.pdb
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.ChatForm.resources
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.LoginForm.resources
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\refint\ClientWinForms.dll
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.pdb
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ClientWinForms.genruntimeconfig.cache
+C:\Users\Lenovo\Desktop\ClientWinForms\ClientWinForms\obj\Debug\net8.0-windows\ref\ClientWinForms.dll
