@@ -1,4 +1,53 @@
-﻿using System;
+﻿
+/*
+
+1. АВТОРИЗАЦІЯ
+ "Type": "LOGIN", "Content": "user1" 
+ "Type": "PASSWORD", "Content": "1234" 
+
+Відповідь сервера:
+ "Type": "AUTH", "Content": "OK 0"  - 0 - звичайний користувач, 1 - адмін
+ "Type": "ERROR", "Content": "Authorization failed" 
+ "Type": "ERROR", "Content": "You are banned" 
+
+
+2. СПИСОК КОРИСТУВАЧІВ
+
+ Клієнт:
+ "Type": "GET_USERS", "Content": "" 
+
+ Відповідь:
+ "Type": "USERS", "Content"
+
+
+3. НАДСИЛАННЯ ПОВІДОМЛЕННЯ
+
+ Клієнт:
+ "Type": "MESSAGE", "Content": "user2::Привіт!" 
+
+Відповідь сервера:
+ "Type": "STATUS", "Content": "MESSAGE_SAVED" 
+ "Type": "STATUS", "Content": "USER_NOT_FOUND"
+
+Отримувач
+ "Type": "INCOMING", "Content": "user1::Привіт!" 
+
+
+4. ІСТОРІЯ ПОВІДОМЛЕНЬ З КОРИСТУВАЧЕМ
+
+Клієнт:
+"Type": "GET_HISTORY", "Content": "user2" 
+
+Відповідь:
+ "Type": "HISTORY","Content" 
+
+⬇ Якщо помилка:
+ "Type": "STATUS", "Content": "USER_NOT_FOUND" 
+
+*/
+
+
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,11 +60,14 @@ namespace ServerChat
 {
     internal class TcpServer
     {
+
+
         private TcpListener listener; // 1 - TCP слухач
         private CancellationTokenSource cancellationTokenSource; // 2 - токен для зупинки сервера
         private string connectionString = "Data Source=chat.db"; // 3 - Шлях до SQLite бази
+        private readonly Dictionary<int, NetworkStream> activeClients = new(); // 4 - активні клієнти
 
-        // 4 - створення сервера: IP + порт
+        // 5 - створення сервера: IP + порт
         public TcpServer(string ip, int port)
         {
             listener = new TcpListener(IPAddress.Parse(ip), port);
@@ -48,72 +100,246 @@ namespace ServerChat
             }
         }
 
-        // 7 - обробка клієнта (авторизація + обробка повідомлень)
+        // 7 - обробка клієнта
         private async Task HandleClientAsync(TcpClient client, CancellationToken token)
         {
-            NetworkStream netStream = client.GetStream();
-            byte[] myBuffer = new byte[1024];
+            var netStream = client.GetStream();
+            byte[] buffer = new byte[2048];
+            int userId = -1;
 
-            // 8 - читаємо логін
-            int count1 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
-            string userName = Encoding.UTF8.GetString(myBuffer, 0, count1).Trim();
-
-            // 9 - читаємо пароль
-            int count2 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
-            string password = Encoding.UTF8.GetString(myBuffer, 0, count2).Trim();
-
-            // 10 - перевірка користувача
-            var userInfo = GetUserInfo(userName, password);
-            int userId = userInfo.userId;
-            bool isAdmin = userInfo.isAdmin;
-            bool isBanned = userInfo.isBanned;
-
-            if (userId == -1)
+            try
             {
-                await SendAsync(netStream, "Authorization failed", token);
-                return;
-            }
+                // авторизація: читаємо логін і пароль
+                string loginJson = await ReadJsonAsync(netStream, token);
+                var loginDto = JsonSerializer.Deserialize<MessageDTO>(loginJson);
 
-            if (isBanned)
-            {
-                await SendAsync(netStream, "You are banned", token);
-                return;
-            }
+                string passJson = await ReadJsonAsync(netStream, token);
+                var passDto = JsonSerializer.Deserialize<MessageDTO>(passJson);
 
-            await SendAsync(netStream, $"AUTHORIZATION_OK ({(isAdmin ? 1 : 0)})", token);
+                string userName = loginDto?.Content;
+                string password = passDto?.Content;
 
-            // 11 - цикл прийому повідомлень
-            while (!token.IsCancellationRequested)
-            {
-                int count3 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
-                string recipientName = Encoding.UTF8.GetString(myBuffer, 0, count3).Trim();
-                int recipientId = GetUserIdByName(recipientName);
+                var userInfo = GetUserInfo(userName, password); // отримуємо інфу про користувача
+                userId = userInfo.userId;
 
-                int count4 = await netStream.ReadAsync(myBuffer, 0, myBuffer.Length, token);
-                string message = Encoding.UTF8.GetString(myBuffer, 0, count4).Trim();
-
-                if (recipientId != -1)
+                if (userId == -1)
                 {
-                    SaveMessage(userId, recipientId, message);
-                    await SendAsync(netStream, "MESSAGE_SAVED", token);
+                    await SendJsonAsync(netStream, new MessageDTO { Type = "ERROR", Content = "Authorization failed" }, token);
+                    return;
                 }
-                else
+
+                if (userInfo.isBanned)
                 {
-                    await SendAsync(netStream, "USER_NOT_FOUND", token);
+                    await SendJsonAsync(netStream, new MessageDTO { Type = "ERROR", Content = "You are banned" }, token);
+                    return;
                 }
+
+                // додаємо клієнта в активних
+                activeClients[userId] = netStream;
+
+                await SendJsonAsync(netStream, new MessageDTO { Type = "AUTH", Content = $"OK {(userInfo.isAdmin ? 1 : 0)}" }, token);
+
+
+                // головний цикл прийому повідомлень від клієнта
+                while (!token.IsCancellationRequested)
+                {
+                    int len = await netStream.ReadAsync(buffer, 0, buffer.Length, token);
+                    string json = Encoding.UTF8.GetString(buffer, 0, len);
+                    var dto = JsonSerializer.Deserialize<MessageDTO>(json);
+
+                    if (dto.Type == "MESSAGE") // надсилання повідомлення іншому користувачу
+                    {
+                        string[] parts = dto.Content.Split("::");
+                        string recipientName = parts[0];
+                        string messageText = parts[1];
+
+                        int recipientId = GetUserIdByName(recipientName);
+                        if (recipientId != -1)
+                        {
+                            SaveMessage(userId, recipientId, messageText); // зберігаємо в БД
+                            await SendJsonAsync(netStream, new MessageDTO { Type = "STATUS", Content = "MESSAGE_SAVED" }, token);
+
+                            if (activeClients.TryGetValue(recipientId, out var recipientStream))
+                            {
+                                var forwardMessage = new MessageDTO
+                                {
+                                    Type = "INCOMING",
+                                    Content = userName // ім’я відправника
+                                };
+                                await SendJsonAsync(recipientStream, forwardMessage, token);
+                            }
+                        }
+                        else
+                        {
+                            await SendJsonAsync(netStream, new MessageDTO { Type = "STATUS", Content = "USER_NOT_FOUND" }, token);
+                        }
+                    }
+                    else if (dto.Type == "HISTORY")
+                    {
+                        int targetId = GetUserIdByName(dto.Content);
+                        if (targetId != -1)
+                        {
+                            var messages = GetMessagesBetweenUsers(userId, targetId);
+                            await SendJsonAsync(netStream, new MessageDTO
+                            {
+                                Type = "HISTORY",
+                                Content = JsonSerializer.Serialize(messages, new JsonSerializerOptions
+                                {
+                                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                })
+                            }, token);
+                        }
+                        else
+                        {
+                            await SendJsonAsync(netStream, new MessageDTO
+                            {
+                                Type = "STATUS",
+                                Content = "USER_NOT_FOUND"
+                            }, token);
+                        }
+                    }
+                    else if (dto.Type == "GET_USERS")
+                    {
+                        var usersAll = GetAllUsers();
+                        await SendJsonAsync(netStream, new MessageDTO
+                        {
+                            Type = "USERS",
+                            Content = JsonSerializer.Serialize(usersAll)
+                        }, token);
+                    }
+                    else if (dto.Type == "GET_HISTORY")
+                    {
+                        int targetId = GetUserIdByName(dto.Content);
+                        if (targetId != -1)
+                        {
+                            var messages = GetMessagesBetweenUsers(userId, targetId);
+                            await SendJsonAsync(netStream, new MessageDTO
+                            {
+                                Type = "HISTORY",
+                                Content = JsonSerializer.Serialize(messages, new JsonSerializerOptions
+                                {
+                                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                })
+                            }, token);
+                        }
+                        else
+                        {
+                            await SendJsonAsync(netStream, new MessageDTO
+                            {
+                                Type = "STATUS",
+                                Content = "USER_NOT_FOUND"
+                            }, token);
+                        }
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Клієнтський потік завершено: " + ex.Message);
+            }
+            finally
+            {
+                if (userId != -1)
+                    activeClients.Remove(userId); // видаляємо користувача зі списку активних клієнтів
+                try { netStream?.Close(); } catch { }
+                try { client?.Close(); } catch { }
             }
         }
+            catch (Exception ex)
+            {
+               
+                Console.WriteLine("Клієнтський потік завершено: " + ex.Message);
+            }
+            finally
+            {
+                // Видаляємо користувача зі списку активних клієнтів, закриваємо з’єднання
+                if (userId != -1)
+                    activeClients.Remove(userId);
+
+                try { netStream?.Close(); } catch { }
+                try { client?.Close(); } catch { }
+            }
+        }
+            // Отримання історії повідомлень між двома користувачами
+        public List<string> GetMessagesBetweenUsers(int user1Id, int user2Id)
+        {
+            var messages = new List<string>();
+
+            using SQLiteConnection conn = new(connectionString); conn.Open();
+            using SQLiteCommand cmd = new(@"
+                SELECT SenderId, RecipientId, Content, Timestamp 
+                FROM Messages 
+                WHERE (SenderId = @u1 AND RecipientId = @u2)
+                   OR (SenderId = @u2 AND RecipientId = @u1)
+                ORDER BY Id", conn);
+
+            cmd.Parameters.AddWithValue("@u1", user1Id);
+            cmd.Parameters.AddWithValue("@u2", user2Id);
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int senderId = reader.GetInt32(0);
+                int recipientId = reader.GetInt32(1);
+                string content = reader.GetString(2);
+                string timestamp = reader.GetValue(3).ToString(); 
+
+                string direction = senderId == user1Id
+                    ? $"\ud83d\udce4 Відправлено: {timestamp} → {GetUserNameById(recipientId)}: {content}"
+                    : $"\ud83d\udce5 Отримано: {timestamp} ← {GetUserNameById(senderId)}: {content}";
+
+                messages.Add(direction);
+            }
+
+            return messages;
+        }
+
+            //читання JSON 
+        private async Task<string> ReadJsonAsync(NetworkStream stream, CancellationToken token)
+        {
+            using MemoryStream ms = new();
+            byte[] buffer = new byte[512];
+
+            while (true)
+            {
+                int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, token);
+                if (bytesRead == 0)
+                    break;
+
+                ms.Write(buffer, 0, bytesRead);
+
+                try
+                {
+                    var json = Encoding.UTF8.GetString(ms.ToArray());
+                    JsonDocument.Parse(json); 
+                    return json;
+                }
+                catch (JsonException)
+                {
+                    continue; 
+                }
+            }
+
+            throw new Exception("Failed to read complete JSON.");
+        }
+
 
         // 12 - відправка повідомлення клієнту
-        private async Task SendAsync(NetworkStream stream, string msg, CancellationToken token)
+        private async Task SendJsonAsync(NetworkStream stream, MessageDTO dto, CancellationToken token)
         {
-            byte[] data = Encoding.UTF8.GetBytes(msg);
+            var options = new JsonSerializerOptions
+            {
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+
+            string json = JsonSerializer.Serialize(dto, options) + "\n";
+            byte[] data = Encoding.UTF8.GetBytes(json);
             await stream.WriteAsync(data, 0, data.Length, token);
             await stream.FlushAsync(token);
-            Console.WriteLine("Sent: " + msg);
         }
 
-        // 13 - авторизація: отримання ID, isAdmin, isBanned
         public (int userId, bool isAdmin, bool isBanned) GetUserInfo(string username, string password)
         {
             using SQLiteConnection conn = new(connectionString); conn.Open();
@@ -132,7 +358,6 @@ namespace ServerChat
 
             return (-1, false, false);
         }
-
         // 14 - отримання ID користувача за логіном
         public int GetUserIdByName(string username)
         {
@@ -146,12 +371,20 @@ namespace ServerChat
         // 15 - збереження повідомлення
         public void SaveMessage(int senderId, int recipientId, string content)
         {
-            using SQLiteConnection conn = new(connectionString); conn.Open();
-            using SQLiteCommand cmd = new("INSERT INTO Messages (SenderId, RecipientId, Content) VALUES (@s, @r, @c)", conn);
-            cmd.Parameters.AddWithValue("@s", senderId);
-            cmd.Parameters.AddWithValue("@r", recipientId);
-            cmd.Parameters.AddWithValue("@c", content);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                using SQLiteConnection conn = new(connectionString); conn.Open();
+                using SQLiteCommand cmd = new("INSERT INTO Messages (SenderId, RecipientId, Content, Timestamp) VALUES (@s, @r, @c, @t)", conn);
+                cmd.Parameters.AddWithValue("@s", senderId);
+                cmd.Parameters.AddWithValue("@r", recipientId);
+                cmd.Parameters.AddWithValue("@c", content);
+                cmd.Parameters.AddWithValue("@t", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ ПОМИЛКА збереження: " + ex.Message);
+            }
         }
 
         // 16 - отримання повідомлень лише за ID відправника
@@ -198,9 +431,7 @@ namespace ServerChat
             using var reader = cmd.ExecuteReader();
 
             while (reader.Read())
-            {
                 users.Add(reader.GetString(0));
-            }
 
             return users;
         }
