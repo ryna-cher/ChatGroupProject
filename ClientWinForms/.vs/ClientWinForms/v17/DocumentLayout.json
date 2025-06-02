@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\clientwinforms\\clientwinforms\\chatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|solutionrelative:clientwinforms\\chatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\clientwinforms\\clientwinforms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|solutionrelative:clientwinforms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\clientwinforms\\chatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|solutionrelative:clientwinforms\\chatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\clientwinforms\\clientwinforms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|solutionrelative:clientwinforms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatForm.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\ChatForm.cs",
+              "RelativeDocumentMoniker": "ClientWinForms\\ChatForm.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\ChatForm.cs",
+              "RelativeToolTip": "ClientWinForms\\ChatForm.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T04:47:57.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "ClientWinForms\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\LoginForm.cs",
+              "RelativeToolTip": "ClientWinForms\\LoginForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T04:35:17.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChatForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\ChatForm.cs",
+              "RelativeDocumentMoniker": "ClientWinForms\\ChatForm.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\ChatForm.cs [Design]",
+              "RelativeToolTip": "ClientWinForms\\ChatForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T04:22:08.927Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "ClientWinForms\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430\\ClientWinForms\\ClientWinForms\\LoginForm.cs [Design]",
+              "RelativeToolTip": "ClientWinForms\\LoginForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T04:19:48.653Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

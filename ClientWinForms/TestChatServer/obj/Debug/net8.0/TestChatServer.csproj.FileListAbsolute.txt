@@ -1,0 +1,14 @@
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\bin\Debug\net8.0\TestChatServer.exe
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\bin\Debug\net8.0\TestChatServer.deps.json
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\bin\Debug\net8.0\TestChatServer.runtimeconfig.json
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\bin\Debug\net8.0\TestChatServer.dll
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\bin\Debug\net8.0\TestChatServer.pdb
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.dll
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\refint\TestChatServer.dll
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.pdb
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\TestChatServer.genruntimeconfig.cache
+C:\Users\Lenovo\Desktop\Нова папка – копія (4)\ClientWinForms\TestChatServer\obj\Debug\net8.0\ref\TestChatServer.dll

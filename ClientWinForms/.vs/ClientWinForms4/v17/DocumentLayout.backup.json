@@ -1,0 +1,149 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\clientwinforms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|solutionrelative:clientwinforms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\clientwinforms\\chatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A43E586D-4F9E-4948-B4E7-696A6B4822D5}|ClientWinForms\\ClientWinForms.csproj|solutionrelative:clientwinforms\\chatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEC4B524-A01B-4F84-BBB8-A8328D83F905}|TestChatServer\\TestChatServer.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\testchatserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEC4B524-A01B-4F84-BBB8-A8328D83F905}|TestChatServer\\TestChatServer.csproj|solutionrelative:testchatserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B1F68B7-9E73-4475-8618-693734B583F9}|ServerNew\\ServerChat.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\servernew\\tcpserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B1F68B7-9E73-4475-8618-693734B583F9}|ServerNew\\ServerChat.csproj|solutionrelative:servernew\\tcpserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A52BC5FB-0523-44E3-B852-E2DAD04725BC}|DataBase\\DataBase.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\database\\dblayer\\chatdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A52BC5FB-0523-44E3-B852-E2DAD04725BC}|DataBase\\DataBase.csproj|solutionrelative:database\\dblayer\\chatdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A52BC5FB-0523-44E3-B852-E2DAD04725BC}|DataBase\\DataBase.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\database\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A52BC5FB-0523-44E3-B852-E2DAD04725BC}|DataBase\\DataBase.csproj|solutionrelative:database\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A52BC5FB-0523-44E3-B852-E2DAD04725BC}|DataBase\\DataBase.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\database\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A52BC5FB-0523-44E3-B852-E2DAD04725BC}|DataBase\\DataBase.csproj|solutionrelative:database\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B1F68B7-9E73-4475-8618-693734B583F9}|ServerNew\\ServerChat.csproj|c:\\users\\lenovo\\desktop\\\u043D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\clientwinforms\\servernew\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B1F68B7-9E73-4475-8618-693734B583F9}|ServerNew\\ServerChat.csproj|solutionrelative:servernew\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\DataBase\\DbLayer\\ChatDbContext.cs",
+              "RelativeDocumentMoniker": "DataBase\\DbLayer\\ChatDbContext.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\DataBase\\DbLayer\\ChatDbContext.cs",
+              "RelativeToolTip": "DataBase\\DbLayer\\ChatDbContext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T11:37:38.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatForm.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ClientWinForms\\ChatForm.cs",
+              "RelativeDocumentMoniker": "ClientWinForms\\ChatForm.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ClientWinForms\\ChatForm.cs",
+              "RelativeToolTip": "ClientWinForms\\ChatForm.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwGYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T09:34:56.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\TestChatServer\\Program.cs",
+              "RelativeDocumentMoniker": "TestChatServer\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\TestChatServer\\Program.cs",
+              "RelativeToolTip": "TestChatServer\\Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T10:45:41.131Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ClientWinForms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "ClientWinForms\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ClientWinForms\\LoginForm.cs",
+              "RelativeToolTip": "ClientWinForms\\LoginForm.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T09:34:53.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Message.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\DataBase\\Models\\Message.cs",
+              "RelativeDocumentMoniker": "DataBase\\Models\\Message.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\DataBase\\Models\\Message.cs",
+              "RelativeToolTip": "DataBase\\Models\\Message.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T11:36:33.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\DataBase\\Models\\User.cs",
+              "RelativeDocumentMoniker": "DataBase\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\DataBase\\Models\\User.cs",
+              "RelativeToolTip": "DataBase\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T11:36:40.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TcpServer.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ServerNew\\TcpServer.cs",
+              "RelativeDocumentMoniker": "ServerNew\\TcpServer.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ServerNew\\TcpServer.cs",
+              "RelativeToolTip": "ServerNew\\TcpServer.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAgwCIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T10:14:28.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ServerNew\\Program.cs",
+              "RelativeDocumentMoniker": "ServerNew\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\\u041D\u043E\u0432\u0430 \u043F\u0430\u043F\u043A\u0430 \u2013 \u043A\u043E\u043F\u0456\u044F (4)\\ClientWinForms\\ServerNew\\Program.cs",
+              "RelativeToolTip": "ServerNew\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T08:35:20.148Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
